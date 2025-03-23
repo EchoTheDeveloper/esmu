@@ -41,7 +41,7 @@ std::string removeSpaces(const std::string &expr) {
 }
 
 double evaluate(std::string expr) {
-  expr = removeSpaces(expr); // Remove all spaces from the expression
+  expr = removeSpaces(expr);
 
   std::stack<double> values;
   std::stack<char> ops;
