@@ -1,0 +1,27 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Ubuntu is required to run the Docker container
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Docker with Arch Linux
+      run: |
+        docker pull archlinux:latest
+
+    - name: Build and Test in Arch Linux Container
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace archlinux:latest /bin/bash -c "
+          pacman -Sy --noconfirm base-devel git make && \
+          make install && \
+          make check && \
+          make distcheck
+        "
