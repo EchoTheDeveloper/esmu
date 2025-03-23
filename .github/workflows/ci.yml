@@ -17,19 +17,19 @@ jobs:
       run: |
         docker pull archlinux:latest
 
-    - name: Build in Arch Linux Container
+    - name: Build and Test in Arch Linux Container
       run: |
         docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace archlinux:latest /bin/bash -c "
           pacman -Sy --noconfirm base-devel git make && \
           make
         "
 
-    - name: Create Tarball
+    - name: Create Tarball of the Build Output
       run: |
-        tar -czf myprogram.tar.gz myprogram
+        tar -czf esmu.tar.gz esmu
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
-        name: myprogram-artifact
-        path: myprogram.tar.gz
+        name: esmu-artifact
+        path: esmu.tar.gz
