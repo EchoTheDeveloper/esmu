@@ -24,7 +24,7 @@ jobs:
           make
         "
 
-    - name: Create Tarball or Binary
+    - name: Create Tarball
       run: |
         tar -czf myprogram.tar.gz myprogram
 
