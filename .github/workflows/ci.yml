@@ -29,7 +29,7 @@ jobs:
         tar -czf myprogram.tar.gz myprogram
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v1
       with:
         name: myprogram-artifact
         path: myprogram.tar.gz
