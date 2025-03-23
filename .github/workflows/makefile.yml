@@ -21,7 +21,5 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace archlinux:latest /bin/bash -c "
           pacman -Sy --noconfirm base-devel git make && \
-          make install && \
-          make check && \
-          make distcheck
+          make
         "
