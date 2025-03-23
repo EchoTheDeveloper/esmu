@@ -24,15 +24,12 @@ jobs:
           make
         "
 
-    - name: Create Tarball or Binary (Optional)
+    - name: Create Tarball or Binary
       run: |
-        # If your Makefile generates a tarball or binary file (e.g., 'myprogram.tar.gz' or 'myprogram')
-        tar -czf myprogram.tar.gz myprogram  # Replace 'myprogram' with your actual binary or files
-        # Or you could directly create a binary, e.g., `make install` produces it, so:
-        # make install && cp /path/to/your/binary ./myprogram.tar.gz
+        tar -czf myprogram.tar.gz myprogram
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: myprogram-artifact
         path: myprogram.tar.gz
