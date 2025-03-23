@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Ubuntu is required to run the Docker container
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -17,9 +17,22 @@ jobs:
       run: |
         docker pull archlinux:latest
 
-    - name: Build and Test in Arch Linux Container
+    - name: Build in Arch Linux Container
       run: |
         docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace archlinux:latest /bin/bash -c "
           pacman -Sy --noconfirm base-devel git make && \
           make
         "
+
+    - name: Create Tarball or Binary (Optional)
+      run: |
+        # If your Makefile generates a tarball or binary file (e.g., 'myprogram.tar.gz' or 'myprogram')
+        tar -czf myprogram.tar.gz myprogram  # Replace 'myprogram' with your actual binary or files
+        # Or you could directly create a binary, e.g., `make install` produces it, so:
+        # make install && cp /path/to/your/binary ./myprogram.tar.gz
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: myprogram-artifact
+        path: myprogram.tar.gz
